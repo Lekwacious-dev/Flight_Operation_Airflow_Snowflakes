@@ -1,0 +1,2 @@
+python-dotenv
+-_PIP_ADDITIONAL_REQUIREMENTS=requests
