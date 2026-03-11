@@ -18,6 +18,7 @@ if str(AIRFLOW_HOME) not in sys.path:
 from scripts.bronze_ingest import run_bronze_ingestion
 from scripts.silver_transform import run_silver_transform
 from scripts.gold_aggregate import run_gold_aggregate
+from scripts.load_gold_to_snowflake import run_gold_to_snowflake
 
 # Default arguments for the DAG. These settings apply to all tasks in the DAG unless overridden at the task level.÷
 default_args = {
@@ -51,5 +52,10 @@ with DAG(
         python_callable=run_gold_aggregate
     )
 
+    load_to_snowflake = PythonOperator(
+        task_id='load_gold_to_snowflake',
+        python_callable=run_gold_to_snowflake
+    )
 
-    bronze >> silver >> gold # Set the task dependency. This means the silver task will only run after the bronze task has successfully completed.
+
+    bronze >> silver >> gold >> load_to_snowflake  # Set the task dependency. This means the silver task will only run after the bronze task has successfully completed.
