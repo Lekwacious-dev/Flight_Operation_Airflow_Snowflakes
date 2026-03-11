@@ -16,7 +16,6 @@ The pipeline ensures:
 
 ---
 ## Achitecture
-![Architecture](Data%20Pipeline.png)
 ![Architecture](architect_files/Architecture.jpg)
 ---
 
